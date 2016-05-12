@@ -1,0 +1,8 @@
+MIDlet-1: Midlet1, , Midlet.Midlet1
+MIDlet-Jar-Size: 458095
+MIDlet-Jar-URL: TimeToStartm.jar
+MIDlet-Name: TimeToStartm
+MIDlet-Vendor: Vendor
+MIDlet-Version: 1.0
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.1
