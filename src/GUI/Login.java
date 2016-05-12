@@ -49,7 +49,7 @@ String strF;
       Command modif = new Command("Modify Profile", Command.SCREEN, 0);
       Command next = new Command("Access Account", Command.SCREEN, 0);
 TextField username = new TextField("username", "", 20, TextField.ANY);
-    TextField password = new TextField("password       ", "", 20, TextField.ANY);
+    TextField password = new TextField("password       ", "", 20, TextField.PASSWORD);
      // Command cmdNext = new Command("Add", Command.OK, 0);
     Command back = new Command("Exit", Command.OK, 0);
      Command cmdBack = new Command("Back", Command.OK, 0);
