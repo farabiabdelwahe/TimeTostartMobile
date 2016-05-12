@@ -25,33 +25,12 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.List;
 import javax.microedition.lcdui.TextField;
 import javax.obex.PasswordAuthentication;
-import javax.wireless.messaging.MessageConnection;
-import javax.wireless.messaging.TextMessage;
-import javax.obex.PasswordAuthentication;
-import javax.wireless.messaging.MessageConnection;
-import javax.wireless.messaging.TextMessage;
-import javax.microedition.io.*;
-import javax.microedition.lcdui.*;
-import javax.wireless.messaging.*;import Midlet.Midlet;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.util.Calendar;
-import javax.microedition.io.Connector;
-import javax.microedition.io.HttpConnection;
-import javax.microedition.lcdui.Alert;
-import javax.microedition.lcdui.AlertType;
-import javax.microedition.lcdui.Command;
-import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.DateField;
-import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Form;
-import javax.microedition.lcdui.List;
-import javax.microedition.lcdui.TextField;
+
 
 public class ModifierUser extends Form implements
         CommandListener, Runnable {
 
-     TextField phone = new TextField("This phone is Used for confirmation ", "", 250, TextField.DECIMAL);
+    
 
     TextField username = new TextField("Username", "", 10, TextField.ANY);
     TextField firstname = new TextField("prenom    ", "", 10, TextField.ANY);
@@ -66,7 +45,6 @@ public class ModifierUser extends Form implements
     HttpConnection hc;
     DataInputStream dis;
     StringBuffer sb;
-     MessageConnection clientConn;
 
 
     String url = "http://localhost/parsing2016/modifieruser.php?";
@@ -79,10 +57,9 @@ public class ModifierUser extends Form implements
      //   append(password);
         append(firstname);
         append(lastname);
-      append(datenais);
+       append(datenais);
      //  append(pays);
         append(qualification);
-         append(phone);
      
    //     password.setString(Midlet.u.getPassword());
         
@@ -116,7 +93,6 @@ public class ModifierUser extends Form implements
            
              String usernam, pass, first, last, pay, qual, mail;
              usernam =Midlet.INSTANCE.u.getGivenName();
-             
        //      pass = password.getString();
              first = firstname.getString();
              last = lastname.getString();
@@ -130,7 +106,7 @@ String daten = cal.get(Calendar.YEAR) + "-" + ( cal.get(Calendar.MONTH) + 1 ) + 
 //             mail = email.getString();
 
             hc = (HttpConnection) Connector.
-                    open(url + "username=" + usernam + "&firstname=" + first + "&lastname=" +  last +"&datenais="+daten + "&qualification=" + qual);
+                    open(url + "username=" + usernam + "&firstname=" + first + "&lastname=" +  last +"&datenais=" + daten + "&qualification=" + qual);
             dis = hc.openDataInputStream();
 
             int ch;
@@ -144,32 +120,17 @@ String daten = cal.get(Calendar.YEAR) + "-" + ( cal.get(Calendar.MONTH) + 1 ) + 
 
             if (sb.toString().equals("successfully added")) {
                 Alert a = new Alert("Information", sb.toString(), null, AlertType.CONFIRMATION);
-              try {
-                             clientConn=(MessageConnection)Connector.open("sms://"+phone.getString());
-                        }
-                        catch(Exception e) {
-                              
-                        }
-                        try {
-                              TextMessage textmessage = (TextMessage) clientConn.newMessage(MessageConnection.TEXT_MESSAGE);
-                              textmessage.setAddress("sms://"+phone.getString());
-                              textmessage.setPayloadText("your account was successfully modified , you can now use the application");
-                              clientConn.send(textmessage);
-                        }
-                        catch(Exception e)
-                        {
-                              
-                        }
+              
                  
                Connected lstp = new Connected("User");  
 
  Midlet.INSTANCE.disp.setCurrent(lstp);
                  a.setTimeout(3000);
-               Midlet.INSTANCE.disp.setCurrent(a);
+                 Midlet.INSTANCE.disp.setCurrent(a);
             } else {
            Connected lstp = new Connected("User");  
 
-Midlet.INSTANCE.disp.setCurrent(lstp);         Alert a = new Alert("Information", sb.toString(), null, AlertType.ERROR);
+ Midlet.INSTANCE.disp.setCurrent(lstp);         Alert a = new Alert("Information", sb.toString(), null, AlertType.ERROR);
                
                  Connected s2 = new Connected("User");  
 
@@ -184,8 +145,3 @@ Midlet.INSTANCE.disp.setCurrent(lstp);         Alert a = new Alert("Information"
     }
 
 }
-
-
-
-
-

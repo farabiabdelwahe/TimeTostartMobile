@@ -34,14 +34,14 @@ public class Mainadmin extends Form implements CommandListener {
         super(title);
                try {
            
-            img=Image.createImage("/GUI/crowd.jpg");
+            img=Image.createImage("/GUI/Crowd.jpg");
            
             
              
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-     append(img);
+      //  append(img);
         append(c1);
        
         addCommand(next);

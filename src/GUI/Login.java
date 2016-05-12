@@ -30,7 +30,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
-import GUI.admin.Mainadmin;
 
 /**
  *
@@ -49,7 +48,7 @@ String strF;
       Command modif = new Command("Modify Profile", Command.SCREEN, 0);
       Command next = new Command("Access Account", Command.SCREEN, 0);
 TextField username = new TextField("username", "", 20, TextField.ANY);
-    TextField password = new TextField("password       ", "", 20, TextField.PASSWORD);
+    TextField password = new TextField("password       ", "", 20, TextField.ANY);
      // Command cmdNext = new Command("Add", Command.OK, 0);
     Command back = new Command("Exit", Command.OK, 0);
      Command cmdBack = new Command("Back", Command.OK, 0);
@@ -160,7 +159,7 @@ Usernam=username.getString();
                   u.setQualifiCation(people[i].getQualifiCation());
                    u.setLastName(people[i].getLastName());
                    u.setCountRy(people[i].getCountRy());
-                   u.setRole(people[i].getRole());
+                   u.setRole(people[i].getCountRy());
                      System.out.println(people[i].getFullName()+"qsdqsdqsdqsdqsd");
                      
                       System.out.println(people.length);
@@ -175,8 +174,7 @@ Usernam=username.getString();
 
                                   
                                        if (Midlet.u.getRole().equals("a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}")){
-                                         
-                                                  Mainadmin lstp = new  Mainadmin("TimeToStart");  
+                                                               Mainadmin lstp = new  GUI.admin.Mainadmin("TimeToStart");  
 
  Midlet.INSTANCE.disp.setCurrent(lstp);
                                        }
