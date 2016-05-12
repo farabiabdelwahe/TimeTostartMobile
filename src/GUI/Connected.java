@@ -109,7 +109,7 @@ TextField username = new TextField("username", "", 20, TextField.ANY);
         }
         if (c == back) {
             //disp.setCurrent(loadingDialog);
-             Midlet.INSTANCE.notifyDestroyed();
+             Midlet.INSTANCE.disp.setCurrent(new MainApp(("TimeToStart")));
         }
 //       if (c == see) { 
 ////       ListUsers lstpa = new ListUsers("User", List.IMPLICIT, disp);

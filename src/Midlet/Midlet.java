@@ -14,6 +14,10 @@ import GUI.LoginForm;
 import GUI.MainApp;
 import GUI.MainProject;
 import GUI.SplashScreen;
+import Handlers.PeopleHandler;
+import java.io.DataInputStream;
+import javax.microedition.io.Connector;
+import javax.microedition.io.HttpConnection;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Display;
@@ -22,6 +26,8 @@ import javax.microedition.midlet.*;
 import javax.microedition.rms.RecordEnumeration;
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 /**
  * @author nader
  */
@@ -31,7 +37,8 @@ public class Midlet extends MIDlet {
   public   Display disp = Display.getDisplay(this);
    
         public static  Midlet INSTANCE;
-        public static User u ;
+        public static User u ; 
+        User[] people ;
            
     
     public void startApp() {
@@ -68,16 +75,82 @@ public class Midlet extends MIDlet {
                 
             }
             else{
+                
                 disp.setCurrent(new MainApp("TimeToStart"));
-                   u.setId(Integer.parseInt(readRecords()));
-                
-                
+         
+                 try{
+        
+            
+            PeopleHandler peopleHandler = new PeopleHandler();
+            // get a parser object
+            SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+            // get an InputStream from somewhere (could be HttpConnection, for example)
+            HttpConnection hc = (HttpConnection) Connector.open("http://localhost/parsing2016/finduser.php?username="+Integer.parseInt(readRecords()));
+                     System.out.println("http://localhost/parsing2016/Login.php?username="+Integer.parseInt(readRecords()));
+            DataInputStream dis = new DataInputStream(hc.openDataInputStream());
+            parser.parse(dis, peopleHandler);
+
+            // display the result
+       //     log = (idd,givenName,familyName,pases,maIl);
+          
+             // Midlet.mMidlet.u = new User();
+           
+               // System.out.println(Midlet.mMidlet.u.getId() +"*****************");
+          
+             
+             //  System.out.println(Midlet.u.getId()+"IIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDDDDDDDDD");
+            people = peopleHandler.getPeople();
+
+            if (people.length > 0) {
+               
+                for (int i = 0; i < people.length; i++) {
+                  //  append(people[i].getFullName(), null);
+                //  (String givenName, String familyName,String passWord,String maIl,int id)
+               User u = new User();
+                  
+                  u.setGivenName(people[i].getGivenName());
+                 u.setFamilyName(people[i].getFamilyName());
+                  u.setPassword(people[i].getPassword());
+                  u.setMaIl(people[i].getMaIl());
+                  u.setId(people[i].getId());
+                  u.setQualifiCation(people[i].getQualifiCation());
+                   u.setLastName(people[i].getLastName());
+                   u.setCountRy(people[i].getCountRy());
+                   u.setRole(people[i].getRole());
+                     System.out.println(people[i].getFullName()+"qsdqsdqsdqsdqsd");
+                     
+                      System.out.println(people.length);
+                    
+                      Midlet.u=u;
+                  disp.setCurrent(new MainApp("TimeToStart"));
+                 
+                      
+         
+                  
+                }
+            
+        
             }
+                 }
+                     catch (Exception e){
+                    
+                    }
+          
+                 }
+            
+
+                   
+                   
+                   
+                   
+                
+                
+            
             closeRecStore();
             
         
-                   
-    }
+    }   
+    
     
     public void pauseApp() {
     }
