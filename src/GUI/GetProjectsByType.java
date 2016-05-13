@@ -32,7 +32,7 @@ public class GetProjectsByType extends Form implements CommandListener {
         super(title);
                        try {
            
-            img=Image.createImage("/GUI/Main.png");
+            img=Image.createImage("/GUI/main.jpg");
            
             
              

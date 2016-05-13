@@ -43,7 +43,7 @@ public class getProjectyName extends Form implements CommandListener {
      
                try {
            
-            img=Image.createImage("/GUI/Main.png");
+            img=Image.createImage("/GUI/main.jpg");
            
             
              

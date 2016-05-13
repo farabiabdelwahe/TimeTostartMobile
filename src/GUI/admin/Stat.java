@@ -63,7 +63,7 @@ public class Stat extends Canvas implements CommandListener {
         /* g.setColor(255,255,255);
         g.fillRect(0, 0, getWidth(), getHeight());*/
          try {
-             imgBackground = Image.createImage("/GUI/image.jpg");
+             imgBackground = Image.createImage("/GUI/admin/image.jpg");
          } catch (IOException ex) {
              ex.printStackTrace();
          }
@@ -73,27 +73,42 @@ public class Stat extends Canvas implements CommandListener {
         
         int ca=0,cy=230;
 
-        for (int i = 0; i < reports.length; i++) {
-            g.setColor(colors[i]);
+        for (int i = 0; i < reports.length; i++)
+        {
+            if(pourcentage(reports[i].getuser(),i)!=0)
+            {   g.setColor(colors[i]);
             
-            g.fillArc(getWidth()/2-100, 10, 200, 200, ca,pourcentage(reports[i].getuser()));
+            g.fillArc(getWidth()/2-100, 10, 200, 200, ca,pourcentage(reports[i].getuser(),i));
+            
             g.fillRect(2, cy, 10, 10);
-            g.drawString(reports[i].getuser()+" "+pourcentage(reports[i].getuser())*0.277+"%",15 , cy-3,0);
-            ca+=pourcentage(reports[i].getuser());
+            g.drawString(reports[i].getuser()+" "+pourcentage(reports[i].getuser(),i)*0.277+"%",15 , cy-3,0);
+            ca+=pourcentage(reports[i].getuser(),i);
             cy+=15;
+            System.out.println("aaaaaaa");
+            System.out.println(pourcentage(reports[i].getuser(),i));}
+         
             
         }
        
     }
-        public int pourcentage(String store){
+        public int pourcentage(String store, int a ){
         int counter=0;
-        for (int i = 0; i < reports.length; i++) {
+        int test=0;
+        for(int j =0;j<a;j++)
+        {
+      if (reports[j].getuser().equals(store))
+                test=-1;
+        }
+        if( test == -1)
+            return 0 ;
+        for (int i = a; i < reports.length; i++) {
             if (reports[i].getuser().equals(store))
                 counter++; 
             
         }
         return counter*360/reports.length;
-    }
+   
+        }
     
 
     public void commandAction(Command c, Displayable d)

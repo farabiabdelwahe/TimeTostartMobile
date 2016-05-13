@@ -65,7 +65,7 @@ public class Report  extends Form implements CommandListener {
 
     public void commandAction(Command c, Displayable d) {
         if (c==back){
-    Midlet.INSTANCE.disp.setCurrent(new ListProjects("Projects",List.IMPLICIT));
+    Midlet.INSTANCE.disp.setCurrent(new MainProject("Projects"));
         }
         
              if (c==feebak){
