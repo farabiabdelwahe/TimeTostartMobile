@@ -45,6 +45,7 @@ public class AjouterUser extends Form implements
     Command cmdNext = new Command("Ajouter", Command.OK, 0);
      Command cmdBack = new Command("Retoure", Command.OK, 0);
     HttpConnection hc;
+
     DataInputStream dis;
     StringBuffer sb;
     MessageConnection clientConn;
@@ -53,6 +54,7 @@ public class AjouterUser extends Form implements
     String url = "http://localhost/parsing2016/insertuser.php?";
 
     public AjouterUser() {
+System.out.println("test fct");
         super("Ajout");
         append(username);
         append(password);
